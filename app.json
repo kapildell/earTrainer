@@ -2,17 +2,19 @@
   "expo": {
     "name": "NoteScout",
     "slug": "note-scout",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icon": "./assets/icon.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.notescout.app"
+      "bundleIdentifier": "com.notescout.app",
+      "buildNumber": "2"
     },
     "android": {
       "package": "com.notescout.app",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#286B4D"
