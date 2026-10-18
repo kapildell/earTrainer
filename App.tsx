@@ -19,6 +19,14 @@ type Octave = 'Low' | 'Medium' | 'High';
 type Phase = 'idle' | 'listening' | 'answering' | 'result' | 'timeout';
 
 const NOTES = ['C', 'C♯', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'A♭', 'A', 'B♭', 'B'];
+const PRAISE_SENTENCES = [
+  'Brilliant listening!',
+  'You nailed it!',
+  'Wonderful ear!',
+  'Beautifully heard!',
+  'That was spot on!',
+  'You’ve got a great ear!',
+];
 const INSTRUMENTS: { name: Instrument; icon: string; detail: string }[] = [
   { name: 'Piano', icon: '♬', detail: 'Bright & clear' },
   { name: 'Guitar', icon: '♩', detail: 'Warm & plucked' },
@@ -179,6 +187,7 @@ export default function App() {
   const [phase, setPhase] = useState<Phase>('idle');
   const [target, setTarget] = useState<number | null>(null);
   const [remaining, setRemaining] = useState(30);
+  const [triesLeft, setTriesLeft] = useState(3);
   const [message, setMessage] = useState('Listen closely, then find the note.');
   const [streak, setStreak] = useState(0);
   const deadline = useRef<number | null>(null);
@@ -246,6 +255,7 @@ export default function App() {
     setTarget(nextTarget);
     setPhase('listening');
     setRemaining(30);
+    setTriesLeft(3);
     setMessage('Listen closely…');
     try {
       await new Promise<void>((resolve, reject) => {
@@ -286,15 +296,24 @@ export default function App() {
 
   const selectAnswer = (answer: number) => {
     if (phase !== 'answering' || target === null) return;
-    deadline.current = null;
     if (answer === target) {
+      deadline.current = null;
       setStreak((value) => value + 1);
-      setMessage(`That's right! It was ${NOTES[target]}.`);
+      const applause = PRAISE_SENTENCES[Math.floor(Math.random() * PRAISE_SENTENCES.length)];
+      setMessage(`${applause} It was ${NOTES[target]}.`);
+      setPhase('result');
     } else {
-      setStreak(0);
-      setMessage(`Not quite — it was ${NOTES[target]}.`);
+      const remainingTries = triesLeft - 1;
+      setTriesLeft(remainingTries);
+      if (remainingTries > 0) {
+        setMessage(`Try again — ${remainingTries} ${remainingTries === 1 ? 'try' : 'tries'} left.`);
+      } else {
+        deadline.current = null;
+        setStreak(0);
+        setMessage(`Not quite — it was ${NOTES[target]}.`);
+        setPhase('result');
+      }
     }
-    setPhase('result');
   };
 
   const busy = phase === 'listening';
