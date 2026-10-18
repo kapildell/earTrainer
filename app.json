@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Note Scout",
+    "slug": "note-scout",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.notescout.app"
+    },
+    "android": {
+      "package": "com.notescout.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#F4F0E9"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1ed33135-28eb-4509-ab62-5fc7946ee965"
+      }
+    },
+    "owner": "kapilagrawal"
+  }
+}
