@@ -2,6 +2,8 @@
 
 NoteScout is a cross-platform ear-training app built with Expo and React Native. Choose piano, guitar, or flute, select a low (C3–B3), medium (C4–B4), or high (C5–B5) octave, then identify a randomly played chromatic note within 30 seconds. The spoken prompt and synthesized note work offline.
 
+The app icon uses the NoteScout listening-note mark in the same forest-green and warm-cream palette as the app.
+
 ## Run the app
 
 Install Node.js 20.19.4 or newer, then from this folder run:
